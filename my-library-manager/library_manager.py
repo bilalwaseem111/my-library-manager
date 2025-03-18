@@ -100,7 +100,7 @@ with st.sidebar:
             st.success("✅ Book added successfully!")
             st.balloons()  # Celebration animation
         else:
-            st.error("⚠️ Please fill in all fields.")
+            st.error("⚠ Please fill in all fields.")
 
     # Sidebar footer with LinkedIn link
     st.markdown(
@@ -123,7 +123,7 @@ else:
     st.info("Your library is empty. Add some books!")
 
 # Search Books
-st.header("🔍 Search Books")
+st.header("Search Books")
 search_query = st.text_input("Search by Title, Author, or Genre")
 if search_query:
     filtered_books = st.session_state.library[
@@ -134,12 +134,12 @@ if search_query:
     if not filtered_books.empty:
         st.dataframe(filtered_books, use_container_width=True)
     else:
-        st.info("🚫 No books found matching your search.")
+        st.info(" No books found matching your search.")
 else:
     st.info("Type a search term to filter books.")
 
 # Edit Book Details
-st.header("✏️ Edit Book Details")
+st.header("✏Edit Book Details")
 if not st.session_state.library.empty:
     book_to_edit = st.selectbox("Select a book to edit", st.session_state.library["Title"])
     if book_to_edit:
@@ -156,7 +156,7 @@ if not st.session_state.library.empty:
                 st.session_state.library.at[book_index, "Author"] = new_author
                 st.session_state.library.at[book_index, "Genre"] = new_genre
                 st.session_state.library.at[book_index, "Year"] = new_year
-                st.success("✅ Book updated successfully!")
+                st.success(" Book updated successfully!")
                 st.snow()  # Snow animation for fun
 else:
     st.info("There are no books to edit yet!")
@@ -169,16 +169,16 @@ if not st.session_state.library.empty:
         st.session_state.library = st.session_state.library[
             st.session_state.library["Title"] != book_to_delete
         ]
-        st.success(f"🗑️ Book '{book_to_delete}' deleted successfully!")
+        st.success(f"🗑 Book '{book_to_delete}' deleted successfully!")
 else:
     st.info("No books to delete.")
 
 # Export Library as CSV
-st.header("📤 Export Library")
+st.header(" Export Library")
 if not st.session_state.library.empty:
     csv = st.session_state.library.to_csv(index=False).encode('utf-8')
     st.download_button(
-        label="⬇️ Download Library as CSV",
+        label="⬇ Download Library as CSV",
         data=csv,
         file_name="my_library.csv",
         mime="text/csv",
